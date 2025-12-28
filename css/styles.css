@@ -1,0 +1,231 @@
+/**
+ * EXTREME CAR SANDBOX PRO - STYLESHEET
+ * Premium UI styling with glassmorphism and modern effects.
+ */
+
+:root {
+    --primary: #ff4422;
+    --accent: #00aaff;
+    --bg-dark: rgba(10, 10, 15, 0.85);
+    --bg-glass: rgba(255, 255, 255, 0.05);
+    --text-main: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.6);
+    --border-glow: rgba(255, 68, 34, 0.4);
+    --font-main: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050508;
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   LOADING SCREEN
+───────────────────────────────────────────────────────────────────────────── */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0a0f 0%, #15151f 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-out, visibility 0.8s;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#loading-screen h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -2px;
+    color: var(--text-main);
+    text-shadow: 0 0 30px rgba(255, 68, 34, 0.5);
+}
+
+#loading-screen .accent {
+    color: var(--primary);
+}
+
+.loader-bar {
+    width: 280px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.loader-progress {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    animation: loading-sweep 1.5s ease-in-out infinite;
+}
+
+@keyframes loading-sweep {
+    0%   { transform: translateX(-100%); }
+    50%  { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+.loading-text {
+    margin-top: 15px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   HUD CONTAINER
+───────────────────────────────────────────────────────────────────────────── */
+#hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    color: var(--text-main);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TOP BAR (Area & Car Name)
+───────────────────────────────────────────────────────────────────────────── */
+.hud-top {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.area-badge {
+    background: var(--bg-dark);
+    padding: 10px 35px;
+    border: 1px solid var(--border-glow);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 68, 34, 0.1);
+}
+
+.car-name {
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   DASHBOARD (Speed & Gear)
+───────────────────────────────────────────────────────────────────────────── */
+.hud-dashboard {
+    position: absolute;
+    bottom: 30px;
+    right: 35px;
+    text-align: right;
+    background: linear-gradient(to left, var(--bg-dark), transparent);
+    padding: 20px 40px 20px 80px;
+    border-right: 4px solid var(--primary);
+    backdrop-filter: blur(5px);
+}
+
+.gear-display {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: -5px;
+}
+
+.gear-display span {
+    font-size: 40px;
+}
+
+.speed-display {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+.speed-value {
+    font-size: 80px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.speed-unit {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-dim);
+    margin-left: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CONTROLS LEGEND
+───────────────────────────────────────────────────────────────────────────── */
+.hud-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    background: var(--bg-dark);
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    backdrop-filter: blur(8px);
+}
+
+.hud-controls kbd {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin: 0 2px;
+    font-family: inherit;
+    font-size: 10px;
+}
